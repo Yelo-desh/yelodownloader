@@ -19,4 +19,27 @@ function fetchFormats() {
     });
 }
 
+function getCookie(name) {
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let c = cookies[i].trim();
+        if (c.startsWith(name + '=')) {
+            return c.split('=')[1];
+        }
+    }
+    return null;
+}
+
+function acceptCookies() {
+    document.cookie = "cookiesAccepted=true; path=/; max-age=" + (60*60*24*365);
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+
+window.onload = function() {
+    if (!getCookie("cookiesAccepted")) {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+};
+
+
 
